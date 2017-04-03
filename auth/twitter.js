@@ -14,7 +14,7 @@ module.exports = function(passport, db) {
   passport.use(new Strategy({
       consumerKey: process.env.TWITTER_CONSUMER_KEY,
       consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
-      callbackURL: 'https://'+process.env.PROJECT_NAME+'.gomix.me' + returnPath,
+      callbackURL: 'https://'+process.env.PROJECT_NAME+'.glitch.me' + returnPath,
       // your app needs explicit permission from Twitter to actually get an email back
       // see https://dev.twitter.com/rest/reference/get/account/verify_credentials
       includeEmail: true,
