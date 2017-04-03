@@ -14,7 +14,7 @@ module.exports = function(passport, db) {
   passport.use(new Strategy({
       clientID: process.env.FACEBOOK_CLIENT_ID,
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-      callbackURL: 'https://'+process.env.PROJECT_NAME+'.gomix.me' + returnPath,
+      callbackURL: 'https://'+process.env.PROJECT_NAME+'.glitch.me' + returnPath,
       profileFields: ['id', 'displayName', 'email']
     },
     function(accessToken, refreshToken, profile, cb) {

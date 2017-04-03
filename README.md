@@ -5,7 +5,7 @@ The app allows you to login using built-in users (db/users.js) or login with Fac
 
 The app is based on the [local](https://github.com/passport/express-4.x-local-example) and [Facebook](https://github.com/passport/express-4.x-facebook-example) examples.
 
-![](https://cdn.hyperdev.com/0d184ee3-fd8d-4b94-acf4-b4e686e57375%2FpassportJSGIF.gif)
+![](https://cdn.glitch.com/0d184ee3-fd8d-4b94-acf4-b4e686e57375%2FpassportJSGIF.gif)
 
 # Getting Started
 To configure OAuth providers with your own app, see the provider's developer docs to create your own app, then stick your secrets in `.env`.
