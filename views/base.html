@@ -9,17 +9,7 @@
     <title>{{title}}</title>
     <meta name="description" content="A cool thing made on Glitch">
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-      footer {
-        margin-top: 50px;
-        padding-top: 25px;
-        border-top: 1px solid lightgrey;
-      }
-      footer > a {
-        color: #BBBBBB;
-      }
-    </style>    
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
   </head>
   <body>
     <header>
@@ -35,7 +25,7 @@
     {% block scripts %}
     <!-- override 'block scripts' in your template -->
     {% endblock %}
-    <footer id="gWidget"></footer>
-    <script src="https://widget.glitch.me/widget.min.js"></script>
+    <script src="https://button.glitch.me/button.js" data-style="glitch"></script>
+    <div class="glitchButton" style="position:fixed;top:20px;right:20px;"></div>
   </body>
 </html>
