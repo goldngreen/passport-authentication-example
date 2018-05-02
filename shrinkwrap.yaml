@@ -232,6 +232,9 @@ packages:
     engines:
       node: '>=0.8.0'
     optional: true
+    os:
+      - darwin
+    requiresBuild: true
     resolution:
       integrity: sha1-mZLxAyySXIKVVNDVmAHcoDE6U1Y=
   /graceful-fs/2.0.3:
@@ -625,7 +628,7 @@ packages:
     resolution:
       integrity: sha1-t0G60BjveNip0ug63gB7P3lZxzI=
 registry: 'https://registry.npmjs.org/'
-shrinkwrapMinorVersion: 4
+shrinkwrapMinorVersion: 5
 shrinkwrapVersion: 3
 specifiers:
   body-parser: ^1.13.3
