@@ -628,7 +628,7 @@ packages:
     resolution:
       integrity: sha1-t0G60BjveNip0ug63gB7P3lZxzI=
 registry: 'https://registry.npmjs.org/'
-shrinkwrapMinorVersion: 5
+shrinkwrapMinorVersion: 6
 shrinkwrapVersion: 3
 specifiers:
   body-parser: ^1.13.3
