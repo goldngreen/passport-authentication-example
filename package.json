@@ -15,5 +15,5 @@
 		"passport-facebook": "^2.0.0",
 		"passport-twitter": "^1.0.4"
 	},
-  "license": "MIT"
+	"license": "MIT"
 }
