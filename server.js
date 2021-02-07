@@ -3,6 +3,7 @@ require('dotenv').config()
 var express = require('express');
 var db = require('./db');
 var auth = require('./auth')(db);
+var sequelize = require('./sequelize');
 
 // Create a new Express application.
 var app = express();

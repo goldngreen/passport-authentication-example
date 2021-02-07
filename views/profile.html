@@ -8,9 +8,7 @@ Provider: {{ user.provider }}<br/>
 Username: {{ user.username }}<br/>
 {% endif %}
 Name: {{ user.displayName }}<br/>
-{% for email in user.emails %}
-Email: {{ email.value }}<br/>
-{% endfor %}
+Email: {{ user.email }}
 </p>
 <a href="/logout">Logout</a>
 {% endblock %}

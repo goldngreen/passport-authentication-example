@@ -1,3 +1,4 @@
+
 module.exports = {
   findById: findById,
   findByUsername: findByUsername,
@@ -43,7 +44,7 @@ function findOrCreate(profile, cb) {
       provider: profile.provider,
       username: profile.username,
       displayName: profile.displayName,
-      emails: profile.emails
+      email: profile.email
     };
     records.push(user);
     return cb(null, user);
@@ -63,12 +64,13 @@ var records = [
       username: 'jack',
       password: process.env.PASS1,
       displayName: 'Jack Skellington',
-      emails: [ { value: 'jack@example.com' } ]
+      email: 'jack@example.com'
     }, {
       id: 2,
       provider: 'local',
       username: 'jill',
       password: process.env.PASS2,
       displayName: 'Jill Scott',
-      emails: [ { value: 'jill@example.com' } ] }
+      email: 'jill@example.com'
+    }
 ];
