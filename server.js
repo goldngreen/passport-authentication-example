@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 var express = require('express');
 var db = require('./db');
 var auth = require('./auth')(db);
