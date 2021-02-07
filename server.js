@@ -13,7 +13,7 @@ nunjucks.configure('views', {
 });
 
 // Use application-level middleware for common functionality, including
-// logging, parsing, and session handling.
+// logging, parsing, and session handlin
 app.use(require('cookie-parser')());
 app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(require('express-session')({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false }));
