@@ -1,0 +1,12 @@
+body-parser
+connect-ensure-login
+cookie-parser
+express
+express-session
+nunjucks
+passport
+passport-local
+passport-facebook
+passport-twitter
+sequelize
+sqlite3
