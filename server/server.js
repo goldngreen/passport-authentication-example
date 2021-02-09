@@ -11,7 +11,7 @@ var app = express();
 
 // Configure view engine to render nunjucks templates.
 var nunjucks = require('nunjucks');
-nunjucks.configure('views', {
+nunjucks.configure('server/views', {
     autoescape: true,
     express: app
 });
@@ -36,7 +36,7 @@ app.get('/profile',
     res.render('profile.html', { title: 'Profile', user: req.user });
   });
 
-require('./default-handlers')(app);
+require('../default-handlers')(app);
 
 var listener = app.listen(process.env.PORT, function() {
   console.log('Your app is listening on port ' + listener.address().port);
