@@ -1,5 +1,7 @@
 
-require('dotenv').config()
+if (process.env.GLITCH_ENV !== 'true') {
+    require('dotenv').config();
+}
 
 var express = require('express');
 var db = require('./db');
