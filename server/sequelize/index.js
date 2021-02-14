@@ -47,7 +47,7 @@ var sequelize = new Sequelize('database', process.env.DB_USER, process.env.DB_PA
   
   // populate table with default users
   function setup(){
-    User.sync({alter: true}) 
+    User.sync({force: true}) 
       .then(function(){
         // Add the default users to the database
         for(var i=0; i<users.length; i++){ // loop through all users
