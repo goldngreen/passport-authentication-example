@@ -1,10 +1,13 @@
 
 module.exports = {
-  findById: findById,
-  findByUsername: findByUsername,
-  findOrCreate: findOrCreate,
-  fetch: fetch
+    create: create,
+    findById: findById,
+    findByUsername: findByUsername,
+    findOrCreate: findOrCreate,
+    fetch: fetch
 };
+
+
 
 function findById(id, cb) {
   process.nextTick(function() {
@@ -55,6 +58,14 @@ function findOrCreate(profile, cb) {
 function fetch() {
   console.log('returning all records');
   return records;
+}
+
+function create(record) {
+    let id = records.length + 1;
+    record["id"] = id;
+    record["provider"] = 'local';
+    records.push(record);
+    return id;
 }
 
 var records = [
