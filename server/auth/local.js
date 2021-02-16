@@ -1,6 +1,6 @@
 module.exports = function (passport, db) {
   
-  var Strategy = require('passport-local').Strategy;
+  let Strategy = require('passport-local').Strategy;
   // Configure the local strategy for use by Passport.
   //
   // The local strategy require a `verify` function which receives the credentials
