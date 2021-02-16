@@ -6,14 +6,14 @@ module.exports = function(passport, db) {
   // typical implementation of this is as simple as supplying the user ID when
   // serializing, and querying the user record by ID from the database when
   // deserializing.
-  passport.serializeUser(function(user, cb) {
-    cb(null, user.id);
+  passport.serializeUser(function(user, next) {
+    next(null, user.id);
   });
   
-  passport.deserializeUser(function(id, cb) {
+  passport.deserializeUser(function(id, next) {
     db.users.findById(id, function (err, user) {
-      if (err) { return cb(err); }
-      cb(null, user);
+      if (err) { return next(err); }
+      next(null, user);
     });
   });
   

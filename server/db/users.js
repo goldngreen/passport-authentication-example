@@ -9,36 +9,36 @@ module.exports = {
 
 
 
-function findById(id, cb) {
+function findById(id, next) {
   process.nextTick(function() {
     for (var i = 0, len = records.length; i < len; i++) {
       var record = records[i];
       if (record.id === id) {
-        return cb(null, record);
+        return next(null, record);
       }
     }
-    cb(new Error('User ' + id + ' does not exist'));
+    next(new Error('User ' + id + ' does not exist'));
   });
 }
 
-function findByUsername(username, cb) {
+function findByUsername(username, next) {
   process.nextTick(function() {
     for (var i = 0, len = records.length; i < len; i++) {
       var record = records[i];
       if (record.username === username) {
-        return cb(null, record);
+        return next(null, record);
       }
     }
-    return cb(null, null);
+    return next(null, null);
   });
 }
 
-function findOrCreate(profile, cb) {
+function findOrCreate(profile, next) {
   process.nextTick(function() {
     for (var i = 0, len = records.length; i < len; i++) {
       var record = records[i];
       if (record.provider === profile.provider && record.id === profile.id) {
-        return cb(null, record);
+        return next(null, record);
       }
     }
     console.log('Creating user');
@@ -50,7 +50,7 @@ function findOrCreate(profile, cb) {
       email: profile.email
     };
     records.push(user);
-    return cb(null, user);
+    return next(null, user);
   });
 }
 

@@ -5,21 +5,21 @@ module.exports = function (passport, db) {
   //
   // The local strategy require a `verify` function which receives the credentials
   // (`username` and `password`) submitted by the user.  The function must verify
-  // that the password is correct and then invoke `cb` with a user object, which
+  // that the password is correct and then invoke `next` with a user object, which
   // will be set at `req.user` in route handlers after authentication.
   passport.use(new Strategy(
-    function(username, password, cb) {
+    function(username, password, next) {
       db.users.findByUsername(username, function(err, user) {
         if (err) { 
-          return cb(err); 
+          return next(err); 
         }
         if (!user) { 
-          return cb(null, false); 
+          return next(null, false); 
         }
         if (user.password != password) { 
-          return cb(null, false); 
+          return next(null, false); 
         }
-        return cb(null, user);
+        return next(null, user);
       });
     }));
   
