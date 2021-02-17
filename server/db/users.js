@@ -1,12 +1,17 @@
 
 module.exports = {
+    count: count,
     create: create,
+    remove: remove,
     findById: findById,
     findByUsername: findByUsername,
     findOrCreate: findOrCreate,
     fetch: fetch
 };
 
+function count() {
+    return records.length;
+}
 
 
 function findById(id, next) {
@@ -67,6 +72,11 @@ function create(record) {
     records.push(record);
     return id;
 }
+
+function remove(id) {
+    records = records.filter((v,i,a) => v.id !== id);
+}
+
 
 var records = [
     { 
