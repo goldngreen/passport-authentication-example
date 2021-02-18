@@ -15,7 +15,7 @@ function count() {
 
 
 function findById(id, next) {
-  process.nextTick(function() {
+  process.nextTick(() => {
     for (var i = 0, len = records.length; i < len; i++) {
       var record = records[i];
       if (record.id === id) {
@@ -27,7 +27,7 @@ function findById(id, next) {
 }
 
 function findByUsername(username, next) {
-  process.nextTick(function() {
+  process.nextTick(() => {
     for (var i = 0, len = records.length; i < len; i++) {
       var record = records[i];
       if (record.username === username) {
@@ -39,7 +39,7 @@ function findByUsername(username, next) {
 }
 
 function findOrCreate(profile, next) {
-  process.nextTick(function() {
+  process.nextTick(() => {
     for (var i = 0, len = records.length; i < len; i++) {
       var record = records[i];
       if (record.provider === profile.provider && record.id === profile.id) {
@@ -74,7 +74,9 @@ function create(record) {
 }
 
 function remove(id) {
-    records = records.filter((v,i,a) => v.id !== id);
+    process.nextTick(() => {
+        records = records.filter((v,i,a) => v.id !== id);
+    });
 }
 
 
