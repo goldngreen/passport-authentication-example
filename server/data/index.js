@@ -1,5 +1,19 @@
 
-var Sequelize = require('sequelize');
+let Sequelize = require('sequelize');
+
+let connectionDetails = {
+    dialect: 'sqlite',
+    pool: {
+        max: 5,
+        min: 0,
+        idle: 10000
+    }
+};
+
+function connect(database) {
+    connectionDetails.storage = database;
+    return new Sequelize(connectionDetails);
+}
 
 function initSchema(sql) {
     let User = sql.define('users', {
@@ -15,7 +29,10 @@ function initSchema(sql) {
         .then(function () {
         });
 
-    return User;
+    return { user: User };
 }
 
-exports.initSchema = initSchema;
+module.exports = {
+    connect: connect,
+    initSchema: initSchema
+};

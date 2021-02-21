@@ -2,8 +2,8 @@
 
 const assert = require('assert');
 
-const connect = require('../server/data/connect').connect;
-const initSchema = require('../server/data/schema').initSchema;
+const connect = require('../server/data').connect;
+const initSchema = require('../server/data').initSchema;
 
 describe('sandbox-1', () => {
 
@@ -22,7 +22,14 @@ describe('sandbox-1', () => {
         let sql = connect('.data/test.sqlite');
         sql.authenticate()
             .then(() => {
-                initSchema(sql);
+                models = initSchema(sql);
+                models.user.describe(sql, {})
+                    .then( result => {
+                        console.log(result);
+                    })
+                    .catch(err => {
+                        assert.fail('Exception connecting to database')
+                    });
             })
             .catch(err => {
                 assert.fail('Exception connecting to database')
