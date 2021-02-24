@@ -34,19 +34,19 @@ function initSchema(sql) {
     return { user: User };
 }
 
-function isUser(user) {
-    return user.hasOwnProperty('username')
-        && user.hasOwnProperty('password')
-        && user.hasOwnProperty('firstName')
-        && user.hasOwnProperty('lastName')
-        && user.hasOwnProperty('email')
-        && user.hasOwnProperty('validated')
-        && user.hasOwnProperty('created')
-        && user.hasOwnProperty('type');
+function validateUser(user) {
+    if (!user.hasOwnProperty('username')) throw new TypeError(`User ${user} missing usernme`);
+    if (!user.hasOwnProperty('password')) throw new TypeError(`User ${user} missing password`);
+    if (!user.hasOwnProperty('firstName')) throw new TypeError(`User ${user} missing first name`);
+    if (!user.hasOwnProperty('lastName')) throw new TypeError(`User ${user} missing last name`);
+    if (!user.hasOwnProperty('email')) throw new TypeError(`User ${user} missing email address`);
+    if (!user.hasOwnProperty('validated')) throw new TypeError(`User ${user} missing validated setting`);
+    if (!user.hasOwnProperty('created')) throw new TypeError(`User ${user} missing created date`);
+    if (!user.hasOwnProperty('type')) throw new TypeError(`User ${user} missing type`);
 }
 
 module.exports = {
     connect: connect,
     initSchema: initSchema,
-    isUser: isUser
+    validateUser: validateUser
 };

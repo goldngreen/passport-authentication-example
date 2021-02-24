@@ -15,7 +15,7 @@ describe('user-service', () => {
             lastName: 'Last',
             email: 'email@sample.com',
             validated: true,
-            created: null,
+            created: Date.now(),
             type: 'local'
         }
         createUser(user);
@@ -28,10 +28,15 @@ describe('user-service', () => {
             lastName: 'Last',
             email: 'email@sample.com',
             validated: true,
-            created: null,
+            created: Date.now(),
             type: 'local'
         }
-        createUser(user);
+        assert.throws(
+            () => createUser(user),
+            {
+                name: 'TypeError'
+            }
+        );
     });
 
     it('should be easy to isolate test code', () => {
