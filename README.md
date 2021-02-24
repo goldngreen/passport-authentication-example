@@ -19,3 +19,18 @@ Note that users and sessions are just stored in memory in this example, so you'l
 # TODO
 
 - [x] this is a complete item
+
+# User Authentication Features
+
+- [ ] register local user
+- [ ] create password for newly registered user
+- [ ] email confirmation for user registration
+- [x] login
+- [x] logout
+- [ ] register Google user
+- [ ] register Facebook user
+- [ ] register Twitter user
+- [ ] recover forgotten password
+- [ ] profile page
+- [ ] change password
+- [ ] 2 factor authentication

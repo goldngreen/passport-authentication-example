@@ -9,7 +9,7 @@
             "request": "launch",
             "name": "Mocha Tests",
             "program": "${env:NODE_PATH}/mocha/bin/_mocha",
-            "args": [ "-u", "bdd", "--timeout", "999999", "--colors", "${workspaceFolder}/test" ],
+            "args": [ "-u", "bdd", "--timeout", "999999", "--colors", "${workspaceFolder}/test/**/*.js" ],
             "internalConsoleOptions": "openOnSessionStart",
             "skipFiles": [ "<node_internals>/**" ]
         },
