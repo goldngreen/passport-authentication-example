@@ -11,6 +11,7 @@ describe('user-service', () => {
         let user = {
             username: 'test-user',
             password: 'password',
+            displayName: 'FirstLast',
             firstName: 'First',
             lastName: 'Last',
             email: 'email@sample.com',
@@ -24,6 +25,7 @@ describe('user-service', () => {
     it('should reject an invalid user', () => {
         let user = {
             password: 'password',
+            displayName: 'FirstLast',
             firstName: 'First',
             lastName: 'Last',
             email: 'email@sample.com',

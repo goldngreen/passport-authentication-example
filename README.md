@@ -7,6 +7,7 @@
 | ---- | ----------- | -------- |
 |  [ ] | Use sqlite instead of sample table | 1 |
 
+
 ## User Authentication Features
 
 | Done | Description | Priority |
