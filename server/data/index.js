@@ -1,5 +1,6 @@
 
 let Sequelize = require('sequelize');
+let typeCheck = require('type-check').typeCheck;
 
 let connectionDetails = {
     dialect: 'sqlite',
@@ -11,6 +12,8 @@ let connectionDetails = {
 };
 
 class Database {
+    type = '{username: String, password: String, displayName: String, firstName: String, lastName: String, email: String, validated: Boolean, created: Date, type: String}';
+
     constructor(dbFilePath) {
         connectionDetails.storage = database;
         this.db = new Sequelize(connectionDetails);    
@@ -37,15 +40,10 @@ class Database {
     }
 
     validateUser(user) {
-        if (!user.hasOwnProperty('username')) throw new TypeError(`User ${user} missing usernme`);
-        if (!user.hasOwnProperty('password')) throw new TypeError(`User ${user} missing password`);
-        if (!user.hasOwnProperty('displayName')) throw new TypeError(`User ${user} missing display name`);
-        if (!user.hasOwnProperty('firstName')) throw new TypeError(`User ${user} missing first name`);
-        if (!user.hasOwnProperty('lastName')) throw new TypeError(`User ${user} missing last name`);
-        if (!user.hasOwnProperty('email')) throw new TypeError(`User ${user} missing email address`);
-        if (!user.hasOwnProperty('validated')) throw new TypeError(`User ${user} missing validated setting`);
-        if (!user.hasOwnProperty('created')) throw new TypeError(`User ${user} missing created date`);
-        if (!user.hasOwnProperty('type')) throw new TypeError(`User ${user} missing type`);
+        let ok = typeCheck(type, user);
+        if (!ok) {
+            console.log("type error");
+        }
     }
 }
 
@@ -75,7 +73,13 @@ function initSchema(sql) {
 }
 
 function validateUser(user) {
-    if (!user.hasOwnProperty('username')) throw new TypeError(`User ${user} missing usernme`);
+    let ok = typeCheck('{username: String, password: String, displayName: String, firstName: String, lastName: String, email: String, validated: Boolean, created: Number, type: String}', user);
+    if (!ok) {
+        console.log("type error");
+    }
+
+
+    if (!('username' in user)) throw new TypeError(`User ${user} missing usernme`);
     if (!user.hasOwnProperty('password')) throw new TypeError(`User ${user} missing password`);
     if (!user.hasOwnProperty('displayName')) throw new TypeError(`User ${user} missing display name`);
     if (!user.hasOwnProperty('firstName')) throw new TypeError(`User ${user} missing first name`);
