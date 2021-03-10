@@ -22,7 +22,7 @@ class Database {
     }
 
     initSchema() {
-        let user = this.db.define('users', User.schema);
+        let user = this.db.define('users', MetaUser.schema);
     
         user.sync({ force: true })
             .then(function () {
@@ -32,7 +32,7 @@ class Database {
     }
 }
 
-class User {
+class MetaUser {
     static type = '{username: String, password: String, displayName: String, firstName: String, lastName: String, email: String, validated: Boolean, created: Number, type: String}';
     static schema = {
         username: { type: Sequelize.STRING, allowNull: false, unique: true },
@@ -65,5 +65,5 @@ class User {
 
 module.exports = {
     Database: Database,
-    User: User
+    MetaUser: MetaUser
 };
