@@ -2,37 +2,34 @@
 
 const assert = require('assert');
 
-const connect = require('../server/data').connect;
-const initSchema = require('../server/data').initSchema;
+const Database = require('../server/data').Database;
 
-describe('sandbox-1', () => {
+describe('sandbox-1-2', () => {
 
     it('should connect to the database', () => {
-        let sql = connect('.data/test.sqlite');
-        sql.authenticate()
+        let db = new Database('.data/test.sqlite', err => { assert.fail('Failed to connect to database'); } );
+    });
+
+    it('should authenticate against the database', () => {
+        let db = new Database('.data/test.sqlite', err => { assert.fail('Failed to connect to database'); } );
+        db.authenticate()
             .then(() => {
-                console.log('Connection has been established successfully.');
+                console.log('Authenticated against test.sqlite');
             })
             .catch(err => {
-                assert.fail('Exception connecting to database')
+                assert.fail('Failed to authenticate against test.sqlite');
             });
     });
 
     it('should set up the schema', () => {
-        let sql = connect('.data/test.sqlite');
-        sql.authenticate()
-            .then(() => {
-                models = initSchema(sql);
-                models.user.describe(sql, {})
-                    .then( result => {
-                        console.log(result);
-                    })
-                    .catch(err => {
-                        assert.fail('Exception connecting to database')
-                    });
+        let db = new Database('.data/test.sqlite');
+        let models = db.initSchema();
+        models.user.describe(db.db, {})
+            .then( result => {
+                console.log(result);
             })
             .catch(err => {
-                assert.fail('Exception connecting to database')
+                assert.fail('Exception in schema')
             });
     });
 
