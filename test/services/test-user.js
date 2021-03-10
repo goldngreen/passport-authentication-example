@@ -2,43 +2,22 @@
 
 const assert = require('assert');
 
-const createUser = require('../../server/services/user').createUser;
-const initSchema = require('../../server/data').initSchema;
+const root = '../../server';
+
+const createUser = require(root + '/services/user').createUser;
+const User = require(root + '/data').User;
 
 describe('user-service', () => {
 
     it('should create a user', () => {
-        let user = {
-            username: 'test-user',
-            password: 'password',
-            displayName: 'FirstLast',
-            firstName: 'First',
-            lastName: 'Last',
-            email: 'email@sample.com',
-            validated: true,
-            created: Date.now(),
-            type: 'local'
-        }
+        user = User.sample;
         createUser(user);
     });
 
     it('should reject an invalid user', () => {
-        let user = {
-            password: 'password',
-            displayName: 'FirstLast',
-            firstName: 'First',
-            lastName: 'Last',
-            email: 'email@sample.com',
-            validated: true,
-            created: Date.now(),
-            type: 'local'
-        }
-        assert.throws(
-            () => createUser(user),
-            {
-                name: 'TypeError'
-            }
-        );
+        let user = User.sample;
+        delete user.username;
+        assert.throws( () => createUser(user), { name: 'TypeError' } );
     });
 
     it('should be easy to isolate test code', () => {

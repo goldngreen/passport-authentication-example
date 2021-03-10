@@ -30,13 +30,6 @@ class Database {
     
         return { user: user };    
     }
-
-    validateUser(user) {
-        let ok = typeCheck(userType, user);
-        if (!ok) {
-            console.log("type error");
-        }
-    }
 }
 
 class User {
@@ -52,6 +45,18 @@ class User {
         created: { type: Sequelize.DATE },
         type: { type: Sequelize.STRING, allowNull: false }
     };
+    
+    static sample = {
+        username: 'username',
+        password: 'password',
+        displayName: 'FirstLast',
+        firstName: 'First',
+        lastName: 'Last',
+        email: 'email@sample.com',
+        validated: true,
+        created: Date.now(),
+        type: 'local'
+    }
 
     static validate(user) {
         if (!typeCheck(this.type, user)) throw new TypeError('Invalid user ${user}');    
