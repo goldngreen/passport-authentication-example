@@ -22,23 +22,13 @@ class Database {
     }
 
     initSchema() {
-        let User = this.db.define('users', {
-            username: { type: Sequelize.STRING, allowNull: false, unique: true },
-            password: { type: Sequelize.STRING },
-            displayName: { type: Sequelize.STRING },
-            firstName: { type: Sequelize.STRING },
-            lastName: { type: Sequelize.STRING },
-            email: { type: Sequelize.STRING, allowNull: false },
-            validated: { type: Sequelize.BOOLEAN },
-            created: { type: Sequelize.DATE },
-            type: { type: Sequelize.STRING, allowNull: false }
-        });
+        let user = this.db.define('users', User.schema);
     
-        User.sync({ force: true })
+        user.sync({ force: true })
             .then(function () {
             });
     
-        return { user: User };    
+        return { user: user };    
     }
 
     validateUser(user) {
