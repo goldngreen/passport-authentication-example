@@ -4,11 +4,11 @@ const assert = require('assert');
 
 
 const connect = require('../data').connect;
-const MetaUser = require('../data').MetaUser;
+const metaUser = require('../data').metaUser;
 
 
 function createUser(user) {
-    MetaUser.validate(user);
+    metaUser.validate(user);
 }
 
 

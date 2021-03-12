@@ -1,6 +1,6 @@
 
 let Sequelize = require('sequelize');
-let typeCheck = require('type-check').typeCheck;
+let Type = require('../useful/type.js').Type;
 
 let connectionDetails = {
     dialect: 'sqlite',
@@ -22,19 +22,34 @@ class Database {
     }
 
     initSchema() {
-        let user = this.db.define('users', MetaUser.schema);
-    
-        user.sync({ force: true })
-            .then(function () {
-            });
-    
-        return { user: user };    
+        return { user: MetaUser.instance.initSchema(this.db) };
     }
 }
 
-class MetaUser {
-    static type = '{username: String, password: String, displayName: String, firstName: String, lastName: String, email: String, validated: Boolean, created: Number, type: String}';
-    static schema = {
+class MetaBase {
+    validate(entity) {
+        this._validate();
+        Type.check(this.type,entity);
+    }
+
+    initSchema(db) {
+        this._validate();
+        let entity = db.define(MetaUser.table, MetaUser.schema);
+        entity.sync({ force: true });
+        return entity;
+    }
+
+    _validate() {
+        Type.check('{ type: String, table: String, schema: {...}, sample: {...}}', this);
+    }
+}
+
+class MetaUser extends MetaBase {
+    static instance = new MetaUser();
+
+    type = '{username: String, password: String, displayName: String, firstName: String, lastName: String, email: String, validated: Boolean, created: Number, type: String}';
+    table = 'users';
+    schema = {
         username: { type: Sequelize.STRING, allowNull: false, unique: true },
         password: { type: Sequelize.STRING },
         displayName: { type: Sequelize.STRING },
@@ -46,7 +61,7 @@ class MetaUser {
         type: { type: Sequelize.STRING, allowNull: false }
     };
     
-    static sample = {
+    sample = {
         username: 'username',
         password: 'password',
         displayName: 'FirstLast',
@@ -57,13 +72,10 @@ class MetaUser {
         created: Date.now(),
         type: 'local'
     }
-
-    static validate(user) {
-        if (!typeCheck(this.type, user)) throw new TypeError('Invalid user ${user}');    
-    }
 }
+
 
 module.exports = {
     Database: Database,
-    MetaUser: MetaUser
+    metaUser: MetaUser.instance
 };
