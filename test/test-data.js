@@ -4,7 +4,7 @@ const assert = require('assert');
 
 const Database = require('../server/data').Database;
 
-describe('sandbox-1-2', () => {
+describe('sandbox', () => {
 
     it('should connect to the database', () => {
         let db = new Database('.data/test.sqlite', err => { assert.fail('Failed to connect to database'); } );
