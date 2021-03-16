@@ -23,7 +23,7 @@ class Database {
     }
 
     initSchema() {
-        return { user: MetaUser.instance.initSchema(this.db) };
+        return { users: MetaUser.instance.initSchema(this.db) };
     }
 }
 
@@ -35,7 +35,7 @@ class MetaBase {
 
     initSchema(db) {
         this._validate();
-        let entity = db.define(MetaUser.table, MetaUser.schema);
+        let entity = db.define(this.table, this.schema);
         entity.sync({ force: true });
         return entity;
     }

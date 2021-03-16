@@ -8,12 +8,12 @@ const metaUser = require('../server/data').metaUser;
 describe('sandbox', () => {
 
     it('should connect to the database', () => {
-        let db = new Database('.data/test.sqlite', err => { assert.fail('Failed to connect to database'); } );
+        let database = new Database('.data/test.sqlite', err => { assert.fail('Failed to connect to database'); } );
     });
 
     it('should authenticate against the database', () => {
-        let db = new Database('.data/test.sqlite', err => { assert.fail('Failed to connect to database'); } );
-        db.authenticate()
+        let database = new Database('.data/test.sqlite', err => { assert.fail('Failed to connect to database'); } );
+        return database.authenticate()
             .then(() => {
                 console.log('Authenticated against test.sqlite');
             })
@@ -23,47 +23,54 @@ describe('sandbox', () => {
     });
 
     it('should set up the schema', () => {
-        let db = new Database('.data/test.sqlite');
-        let models = db.initSchema();
-        models.user.describe(db.db, {})
+        let database = new Database('.data/test.sqlite');
+        let models = database.initSchema();
+        return models.users.describe()
             .then(result => {
-                console.log(result);
+                console.log(`models.user = ${result}`);
             })
             .catch(err => {
-                assert.fail('Exception in schema')
+                assert.fail(`Exception in schema ${err}`);
             });
     });
 
     it('should store users', () => {
-        let db = new Database('.data/test.sqlite');
-        let models = db.initSchema();
+        let database = new Database('.data/test.sqlite');
+        let models = database.initSchema();
 
         let user = metaUser.sample;
-        for (let i = 0; i < 10; i++) {
-            user.username = 'username' + i;
-            models.user.create(user); // create a new entry in the users table
-        }
+        return models.user.sync({force: true}) // Test: use 'force: true' to drop the table user and create a new one if it exists
+        .then(() => {        
+            for (let i = 0; i < 10; i++) {
+                user.username = 'username' + i;
+                models.user.create(user); // create a new entry in the users table
+            }
+        });
     });
 
     it('should find users', () => {
-        let db = new Database('.data/test.sqlite');
-        let models = db.initSchema();
+        let database = new Database('.data/test.sqlite');
+        let models = database.initSchema();
 
         let user = metaUser.sample;
-        for (let i = 0; i < 10; i++) {
-            user.username = 'username' + i;
-            models.user.create(user); // create a new entry in the users table
-        }
-        process.nextTick( () => {
+        return models.user.sync({force: true}) // Test: use 'force: true' to drop the table user and create a new one if it exists
+        .then( () => {        
+            for (let i = 0; i < 10; i++) {
+                user.username = 'username' + i;
+                models.user.create(user); // create a new entry in the users table
+            }
+        })
+        .then( () => {
             models.user.findAll()
                 .then((users) => {
                     users.forEach(user => {
-                        console.log(user.username);
+                        console.log(`User: ${user.username} found`);
                     });
                 })
                 .catch(err => {
-                    assert.fail('Exception in findAll')
+                    console.log(`Exception in findAll ${err}`);
+                    assert.fail(`Exception in findAll ${err}`);
                 });
-            });
+        });
     });
 });
