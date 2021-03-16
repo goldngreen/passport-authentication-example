@@ -39,13 +39,13 @@ describe('sandbox', () => {
         let models = database.initSchema();
 
         let user = metaUser.sample;
-        return models.user.sync({force: true}) // Test: use 'force: true' to drop the table user and create a new one if it exists
-        .then(() => {        
-            for (let i = 0; i < 10; i++) {
-                user.username = 'username' + i;
-                models.user.create(user); // create a new entry in the users table
-            }
-        });
+        return models.users.sync({force: true}) // Test: use 'force: true' to drop the table user and create a new one if it exists
+            .then(() => {        
+                for (let i = 0; i < 10; i++) {
+                    user.username = 'username' + i;
+                    models.users.create(user); // create a new entry in the users table
+                }
+            });
     });
 
     it('should find users', () => {
@@ -53,24 +53,24 @@ describe('sandbox', () => {
         let models = database.initSchema();
 
         let user = metaUser.sample;
-        return models.user.sync({force: true}) // Test: use 'force: true' to drop the table user and create a new one if it exists
-        .then( () => {        
-            for (let i = 0; i < 10; i++) {
-                user.username = 'username' + i;
-                models.user.create(user); // create a new entry in the users table
-            }
-        })
-        .then( () => {
-            models.user.findAll()
-                .then((users) => {
-                    users.forEach(user => {
-                        console.log(`User: ${user.username} found`);
+        return models.users.sync({force: true}) // Test: use 'force: true' to drop the table user and create a new one if it exists
+            .then( () => {        
+                for (let i = 0; i < 10; i++) {
+                    user.username = 'username' + i;
+                    models.users.create(user); // create a new entry in the users table
+                }
+            })
+            .then( () => {
+                models.users.findAll()
+                    .then((users) => {
+                        users.forEach(user => {
+                            console.log(`User: ${user.username} found`);
+                        });
+                    })
+                    .catch(err => {
+                        console.log(`Exception in findAll ${err}`);
+                        assert.fail(`Exception in findAll ${err}`);
                     });
-                })
-                .catch(err => {
-                    console.log(`Exception in findAll ${err}`);
-                    assert.fail(`Exception in findAll ${err}`);
-                });
-        });
+            });
     });
 });
