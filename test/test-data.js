@@ -16,7 +16,7 @@ describe('sqlite3', () => {
             });
         }
           
-        it('should connect to the database', () => {
+        it('should connect to the database', function() {
             const database = new Database(testDatabase);
             assert.ok(database);
             assert.ok(database.db);
@@ -48,7 +48,7 @@ describe('sqlite3', () => {
             });
         });
 
-        it('should find all users', async function() {
+        it('should find all users', function() {
             const database = new Database(testDatabase);
             const models = database.initSchema();
             const testUserCount = 100;
