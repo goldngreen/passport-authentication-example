@@ -9,7 +9,7 @@ let connectionDetails = {
         min: 0,
         idle: 10000
     },
-    logging: true
+    logging: false
 };
 
 class Database {
@@ -48,7 +48,7 @@ class MetaBase {
 class MetaUser extends MetaBase {
     static instance = new MetaUser();
 
-    type = '{username: String, password: String, displayName: String, firstName: String, lastName: String, email: String, validated: Boolean, created: Number, type: String}';
+    type = '{username: String, password: String, displayName: String, firstName: String, lastName: String, email: String, validated: Boolean, created: Number, provider: String}';
     table = 'users';
     schema = {
         username: { type: Sequelize.STRING, allowNull: false, unique: true },
@@ -59,7 +59,7 @@ class MetaUser extends MetaBase {
         email: { type: Sequelize.STRING, allowNull: false },
         validated: { type: Sequelize.BOOLEAN },
         created: { type: Sequelize.DATE },
-        type: { type: Sequelize.STRING, allowNull: false }
+        provider: { type: Sequelize.STRING, allowNull: false }
     };
     
     sample = {
@@ -71,7 +71,7 @@ class MetaUser extends MetaBase {
         email: 'email@sample.com',
         validated: true,
         created: Date.now(),
-        type: 'local'
+        provider: 'local'
     }
 }
 
