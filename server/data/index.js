@@ -9,7 +9,7 @@ let connectionDetails = {
         min: 0,
         idle: 10000
     },
-    logging: false
+    logging: true
 };
 
 class Database {

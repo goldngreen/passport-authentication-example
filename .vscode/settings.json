@@ -4,7 +4,7 @@
             "previewLimit": 50,
             "driver": "SQLite",
             "name": "test",
-            "database": "${workspaceFolder:passport-authentication-example}/.data/test.sqlite"
+            "database": "./.data/test.sqlite"
         }
     ],
     "sqltools.useNodeRuntime": true
