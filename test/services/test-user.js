@@ -9,8 +9,8 @@ const userTestData = require('../data/service').user;
 
 describe('user-service', () => {
 
-    it('should create a user', () => {
-        const user = userTestData.sample();
+    it('should create a user', async () => {
+        const user = await userTestData.sample();
         createUser(user);
     });
 

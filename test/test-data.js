@@ -9,8 +9,9 @@ describe('sqlite3', () => {
 
     describe('database', function() {
         const testDatabase = '.data/test.sqlite';
-        const addTestData = (models, count) => {
-            const items = userTestData.samples(count).forEach((user) => {
+        const addTestData = async (models, count) => {
+            const items = await userTestData.samples(count);
+            items.forEach((user) => {
                 models.users.create(user);
             });
         }
@@ -42,25 +43,25 @@ describe('sqlite3', () => {
             const database = new Database(testDatabase);
             const models = database.initSchema();
             return models.users.sync({force: true}) // Test: use 'force: true' to drop the table and create again
-                .then(() => {
-                    addTestData(models, 10);
-                });
+            .then(() => {
+                addTestData(models, 10);
+            });
         });
 
-        it('should find all users', function() {
+        it('should find all users', async function() {
             const database = new Database(testDatabase);
             const models = database.initSchema();
             const testUserCount = 100;
             return models.users.sync({force: true}) // Test: use 'force: true' to drop the table and create again
-                .then( () => {        
-                    addTestData(models, testUserCount);
-                })
+            .then( () => {        
+                addTestData(models, testUserCount)
                 .then( () => {
                     return models.users.findAll()
-                        .then((users) => {
-                            assert.strictEqual(users.length, testUserCount);
-                        });
+                    .then((users) => {
+                        assert.strictEqual(users.length, testUserCount);
+                    });
                 });
+            });
         });
     });
 });

@@ -1,20 +1,18 @@
 
 const assert = require('assert');
-
-const usersTestData = require('./users.json');
+const fetch = require('node-fetch');
 
 class User {
     static instance = new User();
 
-    sample() {
-        const user = usersTestData[Math.floor(Math.random() * usersTestData.length)];
-        return user;
+    async sample() {
+        const response = await fetch(`https://my.api.mockaroo.com/users.json?key=6b2275d0&count=1`);
+        return await response.json();
     }
 
-    samples(size) {
-        assert(size < usersTestData.length);
-        const start = Math.floor(Math.random() * usersTestData.length-size);
-        return usersTestData.slice(start, start+size);
+    async samples(count) {
+        const response = await fetch(`https://my.api.mockaroo.com/users.json?key=6b2275d0&count=${count}`);
+        return await response.json();
     }
 }
 
