@@ -3,31 +3,34 @@
 const assert = require('assert');
 
 const Database = require('../server/data').Database;
-const metaUser = require('../server/data').metaUser;
+const userTestData = require('./data/service').user;
 
-describe('sandbox', () => {
+describe('sqlite3', () => {
 
     describe('database', function() {
+        const testDatabase = '.data/test.sqlite';
         const addTestData = (models, count) => {
-            const user = metaUser.sample;
-            for (let i = 0; i < count; i++) {
-                user.username = 'username' + i;
-                user.password = 'password' + i;
-                models.users.create(user); // create a new entry in the users table
-            }
+            const items = userTestData.samples(count).forEach((user) => {
+                models.users.create(user);
+            });
         }
-
+          
         it('should connect to the database', () => {
-            const database = new Database('.data/test.sqlite');
+            const database = new Database(testDatabase);
+            assert.ok(database);
+            assert.ok(database.db);
+            assert.ok(database.db.config);
+            assert.ok(database.db.connectionManager);
+            assert.ok(database.db.queryInterface);
         });
 
         it('should authenticate against the database', () => {
-            const database = new Database('.data/test.sqlite');
+            const database = new Database(testDatabase);
             return database.authenticate();
         });
 
         it('should set up the schema', function() {
-            const database = new Database('.data/test.sqlite');
+            const database = new Database(testDatabase);
             const models = database.initSchema();
             assert.ok(models.users);
             assert.ok(models.users.name);
@@ -36,29 +39,26 @@ describe('sandbox', () => {
         });
 
         it('should store users', function() {
-            const database = new Database('.data/test.sqlite');
+            const database = new Database(testDatabase);
             const models = database.initSchema();
-            return models.users.sync({force: true}) // Test: use 'force: true' to drop the table user and create a new one if it exists
+            return models.users.sync({force: true}) // Test: use 'force: true' to drop the table and create again
                 .then(() => {
                     addTestData(models, 10);
                 });
         });
 
-        it('should find users', function() {
-            const database = new Database('.data/test.sqlite');
+        it('should find all users', function() {
+            const database = new Database(testDatabase);
             const models = database.initSchema();
             const testUserCount = 100;
-            return models.users.sync({force: true}) // Test: use 'force: true' to drop the table user and create a new one if it exists
+            return models.users.sync({force: true}) // Test: use 'force: true' to drop the table and create again
                 .then( () => {        
                     addTestData(models, testUserCount);
                 })
                 .then( () => {
-                    models.users.findAll()
+                    return models.users.findAll()
                         .then((users) => {
                             assert.strictEqual(users.length, testUserCount);
-                        })
-                        .catch(err => {
-                            assert.fail(`Exception in findAll ${err}`);
                         });
                 });
         });

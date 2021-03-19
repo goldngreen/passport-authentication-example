@@ -1,3 +1,3 @@
 
 SELECT * FROM `users` 
-ORDER BY username;
+ORDER BY id;

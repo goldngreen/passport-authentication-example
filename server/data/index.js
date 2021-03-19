@@ -41,14 +41,14 @@ class MetaBase {
     }
 
     _validate() {
-        Type.check('{ type: String, table: String, schema: {...}, sample: {...}}', this);
+        Type.check('{ type: String, table: String, schema: {...}}', this);
     }
 }
 
 class MetaUser extends MetaBase {
     static instance = new MetaUser();
 
-    type = '{username: String, password: String, displayName: String, firstName: String, lastName: String, email: String, validated: Boolean, created: Number, provider: String}';
+    type = '{username: String, password: String, displayName: String, firstName: String, lastName: String, email: String, validated: Boolean, created: Maybe Number, provider: String}';
     table = 'users';
     schema = {
         username: { type: Sequelize.STRING, allowNull: false, unique: true },
@@ -61,20 +61,7 @@ class MetaUser extends MetaBase {
         created: { type: Sequelize.DATE },
         provider: { type: Sequelize.STRING, allowNull: false }
     };
-    
-    sample = {
-        username: 'username',
-        password: 'password',
-        displayName: 'FirstLast',
-        firstName: 'First',
-        lastName: 'Last',
-        email: 'email@sample.com',
-        validated: true,
-        created: Date.now(),
-        provider: 'local'
-    }
 }
-
 
 module.exports = {
     Database: Database,

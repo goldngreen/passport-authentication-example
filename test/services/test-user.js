@@ -5,17 +5,17 @@ const assert = require('assert');
 const root = '../../server';
 
 const createUser = require(root + '/services/user').createUser;
-const metaUser = require(root + '/data').metaUser;
+const userTestData = require('../data/service').user;
 
 describe('user-service', () => {
 
     it('should create a user', () => {
-        user = metaUser.sample;
+        const user = userTestData.sample();
         createUser(user);
     });
 
     it('should reject an invalid user', () => {
-        let user = metaUser.sample;
+        const user = Object.assign({}, userTestData.sample());
         delete user.username;
         assert.throws( () => createUser(user), { name: 'TypeError' } );
     });
