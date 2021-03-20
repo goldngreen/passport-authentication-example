@@ -2,8 +2,8 @@
 
 const assert = require('assert');
 
-const Database = require('../server/data').Database;
-const userTestData = require('./data/service').user;
+const Database = require('../../server/data').Database;
+const userTestData = require('test-data-service').user;
 
 describe('sqlite3', () => {
 

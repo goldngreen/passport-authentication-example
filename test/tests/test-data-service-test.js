@@ -1,7 +1,7 @@
 
 const assert = require('assert');
 
-const userTestData = require('./service').user;
+const userTestData = require('test-data-service').user;
 
 describe('data-service', function() {
     it('get mocks from mockaroo', async function()  {

@@ -2,10 +2,10 @@
 
 const assert = require('assert');
 
-const root = '../../server';
+const root = '../../../server';
 
 const createUser = require(root + '/services/user').createUser;
-const userTestData = require('../data/service').user;
+const userTestData = require('test-data-service').user;
 
 describe('user-service', () => {
 

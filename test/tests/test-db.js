@@ -1,7 +1,7 @@
 
 const assert = require('assert');
 
-const db = require('../server/db');
+const db = require('../../server/db');
 
 describe('db', () => {
 
