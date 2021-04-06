@@ -26,6 +26,7 @@ module.exports = async function (passport, userService) {
             app.post('/login',
                 passport.authenticate('local', { failureRedirect: '/login' }),
                 function (req, res) {
+                    console.log("Progress");
                     res.redirect('/');
                 });
         }
