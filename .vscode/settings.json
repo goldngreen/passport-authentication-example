@@ -1,0 +1,11 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "test",
+            "database": "./.data/test.sqlite"
+        }
+    ],
+    "sqltools.useNodeRuntime": true
+}
