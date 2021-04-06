@@ -62,6 +62,7 @@ if (process.env.GLITCH_ENV !== 'true') {
     // Define routes.
     app.get('/',
         function (req, res) {
+            console.log(`index.html - user=${req.user}`);
             res.render('index.html', { title: 'Welcome', user: req.user });
         });
 

@@ -13,8 +13,10 @@ module.exports = async function (passport, userService) {
     passport.deserializeUser(async function (id, next) {
         const user = await userService.findById(id);
         if (user !== null) {
+            console.log(`Deserialized user=${user} with id=${id}`);
             return next(null, user);
         } else {
+            console.log(`Failed to deserialized user=${user} with id=${id}`);
             return next(err);
         }
     });
