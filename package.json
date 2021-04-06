@@ -4,6 +4,9 @@
 		"start": "node server/server.js",
 		"test": "mocha"
 	},
+	"engines": {
+		"node": "12.16.3"
+	},
 	"dependencies": {
 		"body-parser": "^1.13.3",
 		"check-types-2": "^11.4.0",
@@ -17,7 +20,8 @@
 		"passport-facebook": "^2.0.0",
 		"passport-twitter": "^1.0.4",
 		"sqlite3": "*",
-		"sequelize": "*"
+		"sequelize": "*",
+    "type-check": "^0.4.0"
 	},
 	"license": "MIT"
 }
