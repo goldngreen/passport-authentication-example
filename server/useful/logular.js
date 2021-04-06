@@ -77,7 +77,7 @@ class Logular {
     }
 }
 
-let defaultLogger = new Logular(Logular.WARN, 'C:\\Users\\afs\\git\\passport-authentication-example');
+let defaultLogger = new Logular(Logular.TRACE, process.env.PROJECT_ROOT);
 
 module.exports = {
     Logular: Logular,
