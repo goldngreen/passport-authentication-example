@@ -46,7 +46,6 @@ class MetaBase {
 }
 
 class MetaUser extends MetaBase {
-    static instance = new MetaUser();
 
     type = '{username: String, password: String, displayName: String, firstName: String, lastName: String, email: String, validated: Boolean, created: Maybe Number, provider: String}';
     table = 'users';
@@ -63,7 +62,9 @@ class MetaUser extends MetaBase {
     };
 }
 
+const metaUserInstance = new MetaUser();
+
 module.exports = {
     Database: Database,
-    metaUser: MetaUser.instance
+    metaUser: metaUserInstance
 };
