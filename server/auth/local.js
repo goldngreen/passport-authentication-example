@@ -10,10 +10,8 @@ module.exports = async function (passport, userService) {
     passport.use(new Strategy(
         async function (username, password, next) {
             const user = await userService.findByUsername(username);
-            console.log(`username=${user.username}, password=${password}, entered password = ${password}`);
             if (user !== null) {
                 if (user.password === password) {
-                    console.log("All good - do next");
                     return next(null, user);
                 } else {
                     return next(null, false);
