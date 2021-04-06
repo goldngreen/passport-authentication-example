@@ -13,6 +13,7 @@ module.exports = async function (passport, userService) {
             console.log(`username=${user.username}, password=${password}, entered password = ${password}`);
             if (user !== null) {
                 if (user.password === password) {
+                    console.log("All good - do next");
                     return next(null, user);
                 } else {
                     return next(null, false);
