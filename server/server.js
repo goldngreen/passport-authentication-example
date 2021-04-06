@@ -4,8 +4,8 @@ if (process.env.GLITCH_ENV !== 'true') {
 }
 
 (async function () {
-    const UserService = require('server/services/user').UserService;
-    const Database = require('server/data').Database;
+    const UserService = require(process.env.PROJECT_ROOT+'/server/services/user').UserService;
+    const Database = require(process.env.PROJECT_ROOT+'/server/data').Database;
 
     const databaseName = '.data/live.sqlite';
     const database = new Database(databaseName);
@@ -39,7 +39,7 @@ if (process.env.GLITCH_ENV !== 'true') {
     });
 
     var express = require('express');
-    var auth = await require('server/auth')(userService);
+    var auth = await require(process.env.PROJECT_ROOT+'/server/auth')(userService);
 
     // Create a new Express application.
     var app = express();
@@ -71,7 +71,7 @@ if (process.env.GLITCH_ENV !== 'true') {
             res.render('profile.html', { title: 'Profile', user: req.user });
         });
 
-    require('server/default-handlers')(app);
+    require(process.env.PROJECT_ROOT+'/server/default-handlers')(app);
 
     var listener = app.listen(process.env.PORT, function () {
         console.log('Your app is listening on port ' + listener.address().port);

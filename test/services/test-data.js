@@ -4,7 +4,7 @@ if (process.env.GLITCH_ENV !== 'true') {
 }
 
 const fetch = require('node-fetch');
-const testData = require('test/services/Users.json');
+const testData = require(process.env.PROJECT_ROOT+'/test/services/Users.json');
 
 class User {
     static instance = new User();

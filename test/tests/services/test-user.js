@@ -1,11 +1,14 @@
 
+if (process.env.GLITCH_ENV !== 'true') {
+    require('dotenv').config();
+}
 
 const assert = require('assert');
 
-const UserService = require('server/services/user').UserService;
-const Database = require('server/data').Database;
-const userTestData = require('test/services/test-data').user;
-const logger = require('server/useful/logular').defaultLogger;
+const UserService = require(process.env.PROJECT_ROOT+'/server/services/user').UserService;
+const Database = require(process.env.PROJECT_ROOT+'/server/data').Database;
+const userTestData = require(process.env.PROJECT_ROOT+'/test/services/test-data').user;
+const logger = require(process.env.PROJECT_ROOT+'/server/useful/logular').defaultLogger;
 
 "use strict";
 
