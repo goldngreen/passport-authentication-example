@@ -17,17 +17,11 @@ class UserService {
     }
 
     async findById(id) {
-        console.log(`findById(${id})`);
-        const result = this.database.db.models.users.findByPk(id);
-        console.log(`found result ${result}`);
-        return result;
+        return this.database.db.models.users.findByPk(id);
     }
 
     async findByUsername(username) {
-        console.log(`findByUsername(${username})`);
-        const result = await this.database.db.models.users.findOne({ where: {username: username}});
-        console.log(`found result ${result}`);
-        return result;
+        return this.database.db.models.users.findOne({ where: {username: username}});
     }
 
     async remove(id) {
