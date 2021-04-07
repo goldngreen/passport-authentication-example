@@ -24,15 +24,7 @@ module.exports = async function (passport, userService) {
     return {
         routes: function (app) {
             app.post('/login',
-                passport.authenticate('local', function (error, user, info) {
-      // this will execute in any case, even if a passport strategy will find an error
-      // log everything to console
-      console.log(error);
-      console.log(user);
-      console.log(info);
-
-      //res.status(401).send(info);
-    }),
+                passport.authenticate('local', { failureRedirect: '/login' }),
                 function (req, res) {
                     console.log("Progress");
                     res.redirect('/');
