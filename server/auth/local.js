@@ -28,7 +28,13 @@ module.exports = async function (passport, userService) {
                 function (req, res) {
                     console.log("routes: req.body.username="+req.body.username);
                     req.session.testafs = 'testafs';
-                    res.redirect('/');
+                    req.session.save(function(err) {
+                        if(err) {
+                          res.end('session save error: ' + err)
+                          return
+                        }
+                        res.redirect('/')
+                      });
                 });
         }
     };
