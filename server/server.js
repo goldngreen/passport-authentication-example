@@ -55,7 +55,7 @@ if (process.env.GLITCH_ENV !== 'true') {
     // logging, parsing, and session handling.
     app.use(require('cookie-parser')());
     app.use(require('body-parser').urlencoded({ extended: true }));
-    app.use(require('express-session')({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false }));
+    app.use(require('express-session')({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: true }));
 
     auth.init(app);
 

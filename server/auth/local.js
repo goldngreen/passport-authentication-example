@@ -22,7 +22,7 @@ module.exports = async function (passport, userService) {
         }));
 
     return {
-        routes: function (app) {
+        routes: async function (app) {
             app.post('/login',
                 passport.authenticate('local', { failureRedirect: '/login' }),
                 function (req, res) {
