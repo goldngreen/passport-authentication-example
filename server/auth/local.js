@@ -23,12 +23,17 @@ module.exports = async function (passport, userService) {
 
     return {
         routes: function (app) {
+            // console.log(`Session Id is: ${req.session.id}`);
             app.post('/login',
                 passport.authenticate('local', { failureRedirect: '/login' }),
-                  async function (req, res) {
+                  function (req, res) {
+                      console.log(`Session Id is: ${req.session.id}`);
                       console.log("routes: req.body.username="+req.body.username);
                       req.session.testafs = 'testafs';
-                      res.redirect('/');
+                      req.session.save(function(err) {
+                        console.log("Session saved");
+                        res.redirect('/');
+                      });
                 });
         }
     };

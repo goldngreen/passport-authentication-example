@@ -12,7 +12,7 @@ if (process.env.GLITCH_ENV !== 'true') {
 
     await database.authenticate();
     await database.initSchema();
-    userService = new UserService(database);
+    const userService = new UserService(database);
 
     const jack = await userService.create({
         username: "jack",
@@ -57,23 +57,12 @@ if (process.env.GLITCH_ENV !== 'true') {
     app.use(require('body-parser').urlencoded({ extended: true }));
     app.use(require('express-session')({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: true }));
   
-app.use((req, res, next) => {
-  const oldRedirect = res.redirect;
-  res.redirect = function (...args) {
-    if (req.session) {
-      // redirecting after saving...
-      req.session.save(() => Reflect.apply(oldRedirect, this, args))
-    } else {
-      Reflect.apply(oldRedirect, this, args);
-    }
-  }
-});
-  
     auth.init(app);
 
     // Define routes.
     app.get('/',
         function (req, res) {
+            console.log(`Session Id is: ${req.session.id}`);
             console.log(`req.session.testafs=${req.session.testafs}`);
             console.log(`index.html - user=${req.user}`);
             res.render('index.html', { title: 'Welcome', user: req.user });
