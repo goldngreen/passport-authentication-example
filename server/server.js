@@ -56,7 +56,19 @@ if (process.env.GLITCH_ENV !== 'true') {
     app.use(require('cookie-parser')());
     app.use(require('body-parser').urlencoded({ extended: true }));
     app.use(require('express-session')({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: true }));
-
+  
+app.use((req, res, next) => {
+  const oldRedirect = res.redirect;
+  res.redirect = function (...args) {
+    if (req.session) {
+      // redirecting after saving...
+      req.session.save(() => Reflect.apply(oldRedirect, this, args))
+    } else {
+      Reflect.apply(oldRedirect, this, args);
+    }
+  }
+});
+  
     auth.init(app);
 
     // Define routes.
