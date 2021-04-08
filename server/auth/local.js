@@ -27,6 +27,7 @@ module.exports = async function (passport, userService) {
                 passport.authenticate('local', { failureRedirect: '/login' }),
                 function (req, res) {
                     console.log("routes: req.body.username="+req.body.username);
+                    req.session.testafs = 'testafs';
                     res.redirect('/');
                 });
         }
