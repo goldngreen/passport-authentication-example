@@ -5,7 +5,7 @@
 
 | Done | Description | Priority |
 | ---- | ----------- | -------- |
-|  [ ] | Use sqlite instead of sample table | 1 |
+|  [x] | Use sqlite instead of sample table | 1 |
 
 
 ## User Authentication Features
@@ -13,8 +13,8 @@
 | Done | Description | Priority |
 | ---- | ----------- | -------- |
 |  [ ] | Register Local User | 1 |
-|  [ ] | Login | 1 |
-|  [ ] | Logout | 1 |
+|  [x] | Login | 1 |
+|  [x] | Logout | 1 |
 |  [ ] | Create password for new user | 2 |
 |  [ ] | Enable on email confirmation | 2 |
 |  [ ] | Profile page | 2 |

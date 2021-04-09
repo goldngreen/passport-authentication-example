@@ -53,7 +53,6 @@ if (process.env.GLITCH_ENV !== 'true') {
 
     // Use application-level middleware for common functionality, including
     // logging, parsing, and session handling.
-    app.use(require('cookie-parser')());
     app.use(require('body-parser').urlencoded({ extended: true }));
     app.use(require('express-session')({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: true }));
   
@@ -62,9 +61,6 @@ if (process.env.GLITCH_ENV !== 'true') {
     // Define routes.
     app.get('/',
         function (req, res) {
-            console.log(`Session Id is: ${req.session.id}`);
-            console.log(`req.session.testafs=${req.session.testafs}`);
-            console.log(`index.html - user=${req.user}`);
             res.render('index.html', { title: 'Welcome', user: req.user });
         });
 
