@@ -15,6 +15,7 @@
 |  [ ] | Register Local User | 1 |
 |  [x] | Login | 1 |
 |  [x] | Logout | 1 |
+|  [ ] | Encrypt passwords in the database | 1 |
 |  [ ] | Create password for new user | 2 |
 |  [ ] | Enable on email confirmation | 2 |
 |  [ ] | Profile page | 2 |
