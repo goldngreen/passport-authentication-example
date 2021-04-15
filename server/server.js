@@ -1,20 +1,8 @@
 
-if (process.env.GLITCH_ENV !== 'true') {
-    require('dotenv').config();
-}
-
 (async function () {
-    const UserService = require(process.env.PROJECT_ROOT+'/server/services/user').UserService;
-    const Database = require(process.env.PROJECT_ROOT+'/server/data').Database;
+    let reg = await require('./boot');
 
-    const databaseName = '.data/live.sqlite';
-    const database = new Database(databaseName);
-
-    await database.authenticate();
-    await database.initSchema();
-    const userService = new UserService(database);
-
-    const jack = await userService.create({
+    const jack = await reg.userService.create({
         username: "jack",
         password: process.env.PASS1,
         displayName: "Jack Skellington",
@@ -26,7 +14,7 @@ if (process.env.GLITCH_ENV !== 'true') {
         provider: "local"
     });
 
-    const jill = await userService.create({
+    const jill = await reg.userService.create({
         username: "jill",
         password: process.env.PASS2,
         displayName: "Jill Scott",
@@ -38,41 +26,21 @@ if (process.env.GLITCH_ENV !== 'true') {
         provider: "local"
     });
 
-    var express = require('express');
-    var auth = await require(process.env.PROJECT_ROOT+'/server/auth')(userService);
-
-    // Create a new Express application.
-    var app = express();
-
-    // Configure view engine to render nunjucks templates.
-    var nunjucks = require('nunjucks');
-    nunjucks.configure('views', {
-        autoescape: true,
-        express: app
-    });
-
-    // Use application-level middleware for common functionality, including
-    // logging, parsing, and session handling.
-    app.use(require('body-parser').urlencoded({ extended: true }));
-    app.use(require('express-session')({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: true }));
-  
-    auth.init(app);
-
     // Define routes.
-    app.get('/',
+    reg.app.get('/',
         function (req, res) {
             res.render('index.html', { title: 'Welcome', user: req.user });
-        });
+    });
 
-    app.get('/profile',
+    reg.app.get('/profile',
         require('connect-ensure-login').ensureLoggedIn(),
         function (req, res) {
             res.render('profile.html', { title: 'Profile', user: req.user });
-        });
+    });
 
-    require(process.env.PROJECT_ROOT+'/server/default-handlers')(app);
+    require(reg.root+'/server/default-handlers')(reg.app);
 
-    var listener = app.listen(process.env.PORT, function () {
+    let listener = reg.app.listen(process.env.PORT, function () {
         console.log('Your app is listening on port ' + listener.address().port);
     });
 })();
