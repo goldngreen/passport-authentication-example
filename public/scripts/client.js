@@ -6,8 +6,7 @@ function ajax(form, requestParams) {
         method: 'post',
         url: form.action,
         complete: function(result, request) {
-            var element = document.getElementById(div);
-            element.innerHTML = result.responseText;
+            console.log(result);
         },
         error: function(result, request) {
             console.log('Error calling ' + this.data.method);
@@ -15,4 +14,3 @@ function ajax(form, requestParams) {
         data: requestParams
     });   	 							
 }
-

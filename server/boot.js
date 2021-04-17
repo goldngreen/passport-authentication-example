@@ -37,6 +37,7 @@ module.exports = async function () {
     return {
         app: app,
         auth: auth,
+        express: express,
         root: root,
         userService: userService
     }

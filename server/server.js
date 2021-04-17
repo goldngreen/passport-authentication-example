@@ -38,6 +38,8 @@
             res.render('profile.html', { title: 'Profile', user: req.user });
     });
 
+    reg.app.use(reg.express.static('public'));
+
     require(reg.root+'/server/default-handlers')(reg.app);
 
     let listener = reg.app.listen(process.env.PORT, function () {
