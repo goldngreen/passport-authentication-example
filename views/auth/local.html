@@ -11,4 +11,11 @@
 	<input type="submit" value="Submit"/>
 	</div>
 </form>
-<input type="button" value="JSSubmit" onclick="ajax('/login','')"/>
+<script>
+    function submit() {
+        const username = $('input[name="username"]').val();
+        const password = $('input[name="password"]').val();
+        ajax('/login',{ username: username, password: password});
+    }
+</script>
+<input type="button" value="JSSubmit" onclick="submit()"/>
