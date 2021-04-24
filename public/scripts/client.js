@@ -3,10 +3,11 @@
 function ajax(url, requestParams) {
     requestParams.timeout = 120000;
     $.ajax({
-        method: 'get',
+        method: 'post',
         url: url,
         complete: function(result, request) {
-            console.log(result);
+            alert(result.responseText);
+            console.log(result.responseText);
             window.location.replace("/");
         },
         error: function(result, request) {
