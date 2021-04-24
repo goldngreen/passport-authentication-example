@@ -3,7 +3,7 @@
 function ajax(url, requestParams) {
     requestParams.timeout = 120000;
     $.ajax({
-        method: 'post',
+        method: 'get',
         url: url,
         complete: function(result, request) {
             console.log(result);

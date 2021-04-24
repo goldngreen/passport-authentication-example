@@ -15,7 +15,7 @@
     function submit() {
         const username = $('input[name="username"]').val();
         const password = $('input[name="password"]').val();
-        ajax('/login',{ username: username, password: password});
+        ajax('/ajaxlogin',{ username: username, password: password});
     }
 </script>
 <input type="button" value="JSSubmit" onclick="submit()"/>
