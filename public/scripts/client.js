@@ -5,12 +5,9 @@ function ajax(url, requestParams) {
         method: 'post',
         url: url,
         complete: function(result, request) {
-            alert(result.responseText);
-            console.log(result.responseText);
             window.location.replace("/");
         },
         error: function(result, request) {
-            console.log('Error calling ' + this.data.method);
         },
         data: requestParams
     });   	 							
@@ -26,4 +23,8 @@ $(document).ready(function() {
     } catch (e) {
         return true;
     }
+
+    $("#ajax-login").click(function() {
+        ajax('/ajaxlogin', { username: $('#username').val(), password: $('#password').val() });
+    });
 });

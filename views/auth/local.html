@@ -1,21 +1,14 @@
 <form action="/login" method="post">
-	<div>
-	<label>Username:</label>
-	<input type="text" name="username"/><br/>
-	</div>
-	<div>
-	<label>Password:</label>
-	<input type="password" name="password"/>
-	</div>
-	<div>
-	<input type="submit" value="Submit"/>
-	</div>
+    <div>
+        <label>Username:</label>
+        <input type="text" name="username" id="username"/><br />
+    </div>
+    <div>
+        <label>Password:</label>
+        <input type="password" name="password" id="password"/>
+    </div>
+    <div>
+        <input type="submit" value="Login" class="button" />
+        <input type="button" value="Ajax Login" class="button" id="ajax-login"/>
+    </div>
 </form>
-<script>
-    function submit() {
-        const username = $('input[name="username"]').val();
-        const password = $('input[name="password"]').val();
-        ajax('/ajaxlogin',{ username: username, password: password});
-    }
-</script>
-<input type="button" value="JSSubmit" onclick="submit()"/>
