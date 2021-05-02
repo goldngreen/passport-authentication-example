@@ -17,23 +17,21 @@ form {
     margin: 0 auto;
 }
 
-label, input [type=text] [type=password] {
-    /* In order to define widths */
-    width: 10%;
+.form-text {
+    width: 30%;
     display: inline-block;
 }
 
-label {
+.form-label {
     width: 10%;
-    /* Positions the label text beside the input */
     text-align: right;
+    display: inline-block;
 }
 
-label+input [type=text] [type=password] {
-    width: 10%;
-    /* Large margin-right to force the next element to the new-line
-             and margin-left to create a gutter between the label and input */
+.form-label+.form-text {
+    width: 20%;
     margin: 0 30% 0 4%;
+    display: inline-block;
 }
 
 .button {
